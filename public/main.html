@@ -1,0 +1,16 @@
+<h3>{{vm.title}}</h3>
+<hr>
+<nav class="navbar navbar-inverse">
+<a href="/profile" ng-if="vm.isLoggedIn() === true"><button class="btn btn-success">Profile</button></a>
+<a href="/polls" ><button class="btn btn-success">Polls</button></a>
+<a href="/login" ng-if="vm.isLoggedIn() !== true"><button class="btn btn-info navbar-right">Login</button></a>
+<a href="/register" ng-if="vm.isLoggedIn() !== true"><button class="btn btn-info navbar-right">Register</button></a>
+<button class="btn btn-danger navbar-right" ng-click="vm.logOut();" ng-if="vm.isLoggedIn() === true">Logout</button>
+</nav>
+<hr>
+<div class="jumbotron">
+  <h1>FCC Voting App</h1>
+  <p>This is a Restart-one project.</p>
+  <p><a href="https://restart.network/one/" class="btn btn-primary btn-lg" target="-blank">See more about Restart-one</a></p>
+</div>
+
