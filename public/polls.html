@@ -1,5 +1,4 @@
 <div>
-    <h3>{{vm.title}}</h3>
     <a href="/" ><button class="btn btn-success">Home</button></a> 
     <hr>
     <div class="add" ng-if="vm.isLoggedIn() === true">
@@ -15,8 +14,8 @@
 <hr>
 <ul>
     <li ng-repeat="poll in vm.polls">
-       <a href="/poll/{{poll._id}}">
+       <a href="/poll/{{poll._id}}" class="list-group-item active">
         {{poll.name}}
-       </a>
+       </a><br>
     </li>
 </ul>

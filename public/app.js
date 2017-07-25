@@ -4,8 +4,6 @@
 
     app.run(function($rootScope, $location, $window, $http) {
 
-        // Add default Authorization Bearer header to be validated with each request 
-
         $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.localStorage.token 
 
         $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute) {
@@ -19,7 +17,6 @@
                      .then(function(response) {
                          console.log('your token is valid')
                      }, function(err) {
-                         // invalid token. delete token in local storage to prevent further inauthentic requests to API
                          delete $window.localStorage.token;
                          $location.path('/login')
                      })
@@ -100,11 +97,7 @@
 
         vm.logOut = function() {
             $window.localStorage.removeItem('token');
-            vm.message = 'Logging you out...'
-            $timeout(function() {
-                vm.message = '';
                  $location.path('/');
-            }, 2000)
         }
     }
 
@@ -115,7 +108,6 @@
         vm.title = "PollController";
         vm.poll;
         vm.data;
-        vm.link = 'https://mighty-island-59879.herokuapp.com/' + $location.path();
         vm.addOption = function() {
             if(vm.option) {
                 $http.put('/api/polls/add-option', { option: vm.option, id: $routeParams.id }).then(function(response) {
@@ -137,7 +129,6 @@
                     vm.id = response.data._id;
                     vm.owner = response.data.owner;
                     vm.poll = response.data.options;
-                    console.log(vm.poll);
                     vm.data = response.data;
                     google.charts.load('current', {'packages':['corechart']});
                     google.charts.setOnLoadCallback(drawChart);
@@ -167,7 +158,6 @@
 
       vm.vote = function() {
           if(vm.selected) {
-              console.log(vm.selected, vm.poll);
               $http.put('/api/polls', { id: $routeParams.id, vote: vm.selected  })
                    .then(function(response) {
                        vm.getPoll();
@@ -292,15 +282,11 @@
 
         vm.logOut = function() {
             $window.localStorage.removeItem('token');
-            vm.message = 'Logging you out...'
-            $timeout(function() {
-                vm.message = '';
                  $location.path('/');
-            }, 2000)
         }
 
     }
-
+    
     app.controller('RegisterController', RegisterController);
 
     function RegisterController($location, $http, $window, $timeout) {
