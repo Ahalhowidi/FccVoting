@@ -28,7 +28,7 @@
 
         $locationProvider.html5Mode(true);
 
-        $routeProvider.when('/', {
+        $routeProvider.when('/main', {
             templateUrl: 'main.html',
             controller: 'MainController',
             controllerAs: 'vm',
@@ -76,7 +76,7 @@
                 restricted: false
             }
         })
-        $routeProvider.otherwise('/')
+        $routeProvider.otherwise('/polls')
 
     })
     app.controller('MainController', MainController);
@@ -108,6 +108,7 @@
         vm.title = "PollController";
         vm.poll;
         vm.data;
+        vm.link = 'https://fccvoting-hameed85.c9users.io/' + $location.path();
         vm.addOption = function() {
             if(vm.option) {
                 $http.put('/api/polls/add-option', { option: vm.option, id: $routeParams.id }).then(function(response) {
@@ -168,6 +169,13 @@
           else {
               console.log('No poll selected');
           }
+      }
+      vm.copy = function() {
+         
+            vm.lin= window.location.href;
+            prompt('Press Ctrl + C, then Enter to copy to clipboard',vm.lin);
+            console.log(vm.lin);
+
       }
 
     }
@@ -237,6 +245,10 @@
         var onError = function(err) {
             console.error(err)
         }
+        vm.logOut = function() {
+            $window.localStorage.removeItem('token');
+                 $location.path('/');
+        }
 
     }
 
@@ -286,7 +298,7 @@
         }
 
     }
-    
+
     app.controller('RegisterController', RegisterController);
 
     function RegisterController($location, $http, $window, $timeout) {
@@ -344,7 +356,7 @@
 
         var onSuccess = function(response) {
             $window.localStorage.token = response.data;
-            $location.path('/');
+            $location.path('/profile');
         }
         var onError = function(error) {
             console.log(error)

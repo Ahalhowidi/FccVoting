@@ -1,6 +1,16 @@
+<nav class="navbar navbar-inverse">
+<a href="/main" ><button class="btn btn-success">Home</button></a> 
+<a href="/profile" ng-if="vm.isLoggedIn() === true"><button class="btn btn-success">Profile</button></a>
+<a href="/login" ng-if="vm.isLoggedIn() !== true"><button class="btn btn-info navbar-right">Login</button></a>
+<a href="/register" ng-if="vm.isLoggedIn() !== true"><button class="btn btn-info navbar-right">Register</button></a>
+<button class="btn btn-danger navbar-right" ng-click="vm.logOut();" ng-if="vm.isLoggedIn() === true">Logout</button>
+</nav>
 <div>
-    <a href="/" ><button class="btn btn-success">Home</button></a> 
+   
     <hr>
+    <div class="add" ng-if="vm.isLoggedIn() !== true">
+        <p>To add new poll You need to login or register </p>
+    </div>
     <div class="add" ng-if="vm.isLoggedIn() === true">
     <input type="text" ng-model="vm.poll.name" class="form-control" placeholder="Poll Name">
     <br>
