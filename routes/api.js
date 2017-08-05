@@ -1,7 +1,7 @@
 var express = require('express');
 var bcrypt = require('bcrypt-nodejs');
-var User = require('./models/user');
-var Poll = require('./models/polls');
+var User = require('../models/user');
+var Poll = require('../models/polls');
 var jwt = require('jsonwebtoken');
 var router = express.Router({ caseSensitive: true });
 
