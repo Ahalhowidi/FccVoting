@@ -1,5 +1,5 @@
 //Creat DB connection
-var db  = 'mongodb://localhost:27017/fccVoting';
+var db = "mongodb://hhh:hhh@ds141118.mlab.com:41118/heroku_jlhswwr5"
 //Creat a port for server to listen on
 var port = process.env.PORT || 8000;
 
